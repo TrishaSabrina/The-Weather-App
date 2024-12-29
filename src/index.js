@@ -23,6 +23,8 @@ function refreshWeather(response) {
 
   let iconElement = document.querySelector("#icon");
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -83,6 +85,12 @@ function showForecast() {
 
   let changeHtml = document.querySelector("#frcst");
   changeHtml.innerHTML = forecastHtml;
+}
+
+function getForecast(city) {
+  let apiKey = "3od7af2214ca31898090dtcb837a2247";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  axios(apiUrl).then(showForecast);
 }
 
 searchCity("Paris");
